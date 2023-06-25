@@ -1,26 +1,53 @@
 // 1.
 function sum(array) {
   let sum = 0;
-  for (let i = 0; i < array.length; i++) {
-    sum += array[i];
+  try {
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i];
+    }
+  } catch (error) {
+      throw new TypeError("Invalid array")
   }
   return sum;
 }
 
-let res = sum(null);
-console.log(res);
+try {
+  let res = sum(null);
+  console.log(res);
+} catch (error) {
+  console.log(error.name + ": " + error.message);
+}
 
-// 2.
-// tests
+
+try {
+  sayName(1);
+} catch (error) {
+  console.log(error.name + ": " + error.message)
+}
 sayName("Alex");
-sayName(1);
 // Your code here
 
-// 3.
+function sayName(name) {
+  if (typeof name !== "string") {
+    throw new TypeError("Invalid name! Must be a string!")
+  } else {
+    console.log(name)
+  }
+}
+
+// // 3.
 function greet(greeting) {
   if (!greeting) {
     throw new Error("There was no greeting given.");
   }
 
   console.log(greeting);
+}
+
+try {
+  greet();
+} catch (error) {
+  console.log(error.name + ": " + error.message)
+} finally {
+  console.log("Hello World!")
 }
